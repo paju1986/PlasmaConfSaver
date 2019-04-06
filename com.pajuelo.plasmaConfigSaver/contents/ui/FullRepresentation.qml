@@ -96,7 +96,7 @@ Item {
                         
                         
                         
-                        
+                        executeSource.connectSource("mkdir $(pwd)/.config/plasmaConfSaver/")
                         executeSource.connectSource("mkdir " + configFolder);
                         executeSource.connectSource("cp $(pwd)/.config/plasma-org.kde.plasma.desktop-appletsrc " + configFolder + "/plasma-org.kde.plasma.desktop-appletsrc") 
                         executeSource.connectSource("cp $(pwd)/.config/plasmarc " + configFolder + "/plasmarc")

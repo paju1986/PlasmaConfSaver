@@ -101,6 +101,7 @@ Item {
                         executeSource.connectSource("cp $(pwd)/.config/plasmarc " + configFolder + "/plasmarc")
                         executeSource.connectSource("cp $(pwd)/.config/plasmashellrc " + configFolder + "/plasmashellrcc")
                       listView.forceLayout()
+                      text1.text = ""
                         
                     }
                                

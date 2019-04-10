@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Jason Lim (yuenhoe86@gmail.com)
+ * Copyright 2019 Alberto Pajuelo(paju1986@gmail.com)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as

@@ -25,7 +25,8 @@ Item {
     property real mediumSpacing: 1.5*units.smallSpacing
     property real textHeight: theme.defaultFont.pixelSize + theme.smallestFont.pixelSize + units.smallSpacing
     property real itemHeight: Math.max(units.iconSizes.medium, textHeight)
-    property string savePath: getPwd().trim() + "/.config/plasmaConfSaver" ;
+    property string savePath: null
+    property string loadPath: null
 
     Layout.minimumWidth: widgetWidth + 100
     Layout.minimumHeight: (itemHeight + 2*mediumSpacing) * 10//listView.count
@@ -39,26 +40,38 @@ Item {
   
     
     PlasmaCore.DataSource {
-        id: executeSource
-        engine: "executable"
-        connectedSources: ["pwd"]
-      
-    }
+		id: executeSource
+		engine: "executable"
+		connectedSources: []
+		onNewData: {
+			var exitCode = data["exit code"]
+			var exitStatus = data["exit status"]
+			var stdout = data["stdout"]
+			var stderr = data["stderr"]
+			exited(sourceName, exitCode, exitStatus, stdout, stderr)
+			disconnectSource(sourceName) // cmd finished
+		}
+		function exec(cmd) {
+			if (cmd) {
+				connectSource(cmd)
+			}
+		}
+		signal exited(string cmd, int exitCode, int exitStatus, string stdout, string stderr)
+	}
+	
+
+    
+
     
     PlasmaCore.DataSource {
         id: placesSource
         engine: 'filebrowser'
-        connectedSources: savePath
         interval: 500
+        Component.onCompleted: {
+            executeSource.connectSource("pwd")
+        }
     }
     
-    function getPwd() {
-        return executeSource.data["pwd"]["stdout"]
-    }
-    
-     
-     
-       
 
  
     Column {
@@ -85,27 +98,98 @@ Item {
                                     active: isHovered
                             }
              width: parent.width * 0.1
+             
              onClicked: {
-                       var pwd = executeSource.data["pwd"]["stdout"]
+                  //     var pwd = executeSource.data["pwd"]["stdout"]
                         
                         if(text1.text == "" || text1.text == null || text1.text == undefined) {
                             text1.text = "default"
                         }
-                        var configFolder = "$(pwd)/.config/plasmaConfSaver/" + text1.text;
+                        var configFolder = "$(pwd)/.config/plasmaConfSaver/" + text1.text
                         
                         
                         
                         executeSource.connectSource("mkdir $(pwd)/.config/plasmaConfSaver/")
                         executeSource.connectSource("mkdir " + configFolder);
+                        
+                        //plasma config files
                         executeSource.connectSource("cp $(pwd)/.config/plasma-org.kde.plasma.desktop-appletsrc " + configFolder + "/plasma-org.kde.plasma.desktop-appletsrc") 
                         executeSource.connectSource("cp $(pwd)/.config/plasmarc " + configFolder + "/plasmarc")
                         executeSource.connectSource("cp $(pwd)/.config/plasmashellrc " + configFolder + "/plasmashellrcc")
+                        
+                        //latte-dock config files
+                        executeSource.connectSource("cp $(pwd)/.config/lattedockrc " + configFolder + "/lattedockrc")
+                        executeSource.connectSource("cp -r $(pwd)/.config/latte " + configFolder + "/latte")
+                       
+                        executeSource.connectSource("pidof latte-dock")
+
+                        
+                        
+                        
+                        
                       listView.forceLayout()
-                      text1.text = ""
+                      
                         
                     }
+                    Connections {
+                        target: executeSource
+                        onExited : {
+                            
+                    var configFolder = "$(pwd)/.config/plasmaConfSaver/" + text1.text
+                   
+                            if(cmd == "pidof latte-dock") {
+                                
+                                    var latteDockRunning = stdout
+                                    
+                                    
+                                            
+                                //if latte-dock was running when we saved then create a flag file for running it on restore            
+                                if(latteDockRunning != "") {
+                                    executeSource.connectSource("touch " + configFolder + "/latterun")
+                                
+                                }
+                                text1.text = ""
+                                
+                            }
+                            
+                            if(cmd == "pwd") {
+                                
+                                console.log("entra en pwd")
+                                savePath = stdout.trim() + "/.config/plasmaConfSaver" ;
+                                console.log(savePath)
+                                placesSource.connectSource(savePath)
+                                
+                            }
+                            
+                            if(cmd.indexOf("/latterun|grep -i latterun") != -1) {
+                                 var latteDockRunning = stdout
+                                    console.log(cmd)
+                                    console.log(stdout)
+                                    //if latte-dock was running when we saved then create a flag file for running it on restore            
+                                    if(latteDockRunning != "") {
+                                        console.log("exe")
+                                        executeSource.connectSource("killall latte-dock")
+                                        executeSource.connectSource("sleep 1 && latte-dock")
+                                    } else{
+                                        executeSource.connectSource("killall latte-dock")
+                                    }
+                                    executeSource.connectSource("killall plasmashell && kstart5 plasmashell --window 5") 
+                                
+                            }
+                            
+                            
+                            
+                           
+                            
+                
+                            
+                
+                
+                
+                        }
+                    }
                                
-           }
+                }
         }
          
          
@@ -117,7 +201,13 @@ Item {
         ListView {
             id: listView
             anchors.fill: parent
-            model: placesSource.data[savePath]["directories.all"]
+            model: 
+                if(placesSource.data[savePath] != undefined) {
+                    return placesSource.data[savePath]["directories.all"]
+                } else {
+                    return ""
+                }
+            
             
             highlight: PlasmaComponents.Highlight {}
             highlightMoveDuration: 0
@@ -188,13 +278,27 @@ Item {
                                     executeSource.connectSource("rm -Rf $(pwd)/.config/plasmarc")
                                     executeSource.connectSource("rm -Rf $(pwd)/.config/plasmashellrc")
                                     
-                                    
+                                    //plasma config files
                                     executeSource.connectSource("cp " + savePath + "/" + model.modelData + "/plasma-org.kde.plasma.desktop-appletsrc $(pwd)/.config/plasma-org.kde.plasma.desktop-appletsrc") 
                                     executeSource.connectSource("cp " + savePath + "/" + model.modelData + "/plasmarc $(pwd)/.config/plasmarc")
                                     executeSource.connectSource("cp " + savePath + "/" + model.modelData + "/plasmashellrcc $(pwd)/.config/plasmashellrc")
                                     
-                                  
-                                    executeSource.connectSource("killall plasmashell && kstart5 plasmashell --window 5")
+                                    //latte-dock config files
+                                    executeSource.connectSource("rm -Rf $(pwd)/.config/lattedockrc")
+                                    executeSource.connectSource("rm -Rf $(pwd)/.config/latte")
+                                    executeSource.connectSource("cp "+savePath + "/" + model.modelData + "/lattedockrc $(pwd)/.config/lattedockrc ")
+                                    executeSource.connectSource("cp -r "+savePath + "/" + model.modelData + "/latte $(pwd)/.config/latte")
+                                    
+                                    
+                                     executeSource.connectSource("ls "+savePath + "/" + model.modelData + "/latterun|grep -i latterun")
+                                     
+                            
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
                                     
                                     
                                     

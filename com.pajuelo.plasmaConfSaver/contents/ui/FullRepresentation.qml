@@ -117,6 +117,10 @@ Item {
                         executeSource.connectSource("cp $(pwd)/.config/plasmarc " + configFolder + "/plasmarc")
                         executeSource.connectSource("cp $(pwd)/.config/plasmashellrc " + configFolder + "/plasmashellrcc")
                         
+                        //kwin
+                        executeSource.connectSource("cp $(pwd)/.config/kwinrc " + configFolder + "/kwinrc")
+                        executeSource.connectSource("cp $(pwd)/.config/kwinrulesrc " + configFolder + "/kwinrulesrc")
+                        
                         //latte-dock config files
                         executeSource.connectSource("cp $(pwd)/.config/lattedockrc " + configFolder + "/lattedockrc")
                         executeSource.connectSource("cp -r $(pwd)/.config/latte " + configFolder + "/latte")
@@ -173,6 +177,7 @@ Item {
                                     } else{
                                         executeSource.connectSource("killall latte-dock")
                                     }
+                                    executeSource.connectSource("kwin_x11 --replace") 
                                     executeSource.connectSource("killall plasmashell && kstart5 plasmashell --window 5") 
                                 
                             }
@@ -282,6 +287,10 @@ Item {
                                     executeSource.connectSource("cp " + savePath + "/" + model.modelData + "/plasma-org.kde.plasma.desktop-appletsrc $(pwd)/.config/plasma-org.kde.plasma.desktop-appletsrc") 
                                     executeSource.connectSource("cp " + savePath + "/" + model.modelData + "/plasmarc $(pwd)/.config/plasmarc")
                                     executeSource.connectSource("cp " + savePath + "/" + model.modelData + "/plasmashellrcc $(pwd)/.config/plasmashellrc")
+                                    
+                                    //kwin
+                                    executeSource.connectSource("cp " + savePath + "/" + model.modelData + "/kwinrc $(pwd)/.config/kwinrc")
+                                    executeSource.connectSource("cp " + savePath + "/" + model.modelData + "/kwinrulesrc $(pwd)/.config/kwinrulesrc")
                                     
                                     //latte-dock config files
                                     executeSource.connectSource("rm -Rf $(pwd)/.config/lattedockrc")

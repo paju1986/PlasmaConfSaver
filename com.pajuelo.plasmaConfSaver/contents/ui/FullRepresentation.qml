@@ -175,8 +175,8 @@ Item {
                                     //if latte-dock was running when we saved then create a flag file for running it on restore            
                                     if(latteDockRunning != "") {
                                         console.log("exe")
-                                        executeSource.connectSource("killall latte-dock")
-                                        executeSource.connectSource("sleep 1 && latte-dock")
+                                        executeSource.connectSource("latte-dock --replace")
+                                       
                                     } else{
                                         executeSource.connectSource("killall latte-dock")
                                     }

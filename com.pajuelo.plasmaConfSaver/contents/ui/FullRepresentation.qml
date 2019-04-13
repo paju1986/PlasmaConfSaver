@@ -24,7 +24,7 @@ Item {
     id: "parentItem"
     property real mediumSpacing: 1.5*units.smallSpacing
     property real textHeight: theme.defaultFont.pixelSize + theme.smallestFont.pixelSize + units.smallSpacing
-    property real itemHeight: Math.max(units.iconSizes.medium, textHeight)
+    property real itemHeight: Math.max(units.iconSizes.large, textHeight)
     property string savePath: null
     property string loadPath: null
 
@@ -111,6 +111,9 @@ Item {
                         
                         executeSource.connectSource("mkdir $(pwd)/.config/plasmaConfSaver/")
                         executeSource.connectSource("mkdir " + configFolder);
+                        
+                        //screenshot
+                        executeSource.connectSource("scrot " + configFolder + "/screenshot.png")
                         
                         //plasma config files
                         executeSource.connectSource("cp $(pwd)/.config/plasma-org.kde.plasma.desktop-appletsrc " + configFolder + "/plasma-org.kde.plasma.desktop-appletsrc") 
@@ -220,7 +223,7 @@ Item {
 
             delegate: Item {
                 width: parent.width
-                height: itemHeight + 2*mediumSpacing
+                height: itemHeight + 2*mediumSpacing + 50
 
                 property bool isHovered: false
                 property bool isEjectHovered: false
@@ -246,7 +249,7 @@ Item {
                         x: mediumSpacing
                         y: mediumSpacing
                         width: parent.width - 2*mediumSpacing
-                        height: itemHeight
+                        height: itemHeight + 2*mediumSpacing + 50
                         spacing: mediumSpacing
                         
 //                         Item { // Hack - since setting the dimensions of PlasmaCore.IconItem won't work
@@ -262,13 +265,28 @@ Item {
 //                         }
                             
 
-                       
-                        PlasmaComponents.Label {
+                       Column {
+                            spacing: mediumSpacing
+                           width: parent.width - (btnLoad.width + mediumSpacing *2 + btnDelete.width)
+                           PlasmaComponents.Label {
+                               id: title
                                 text: model.modelData
-                                width: parent.width - (btnLoad.width + mediumSpacing *2 + btnDelete.width)
+                                
                                 height: theme.defaultFont.pixelSize
                                 elide: Text.ElideRight
                             }
+                         
+                            Image {
+                              
+                                width: parent.width - (btnLoad.width + mediumSpacing *2 + btnDelete.width)
+                                height: parent.width - (btnLoad.width + mediumSpacing *2 + btnDelete.width) * 1.77
+                                fillMode: Image.Stretch
+                                source: savePath + "/" + model.modelData + "/screenshot.png"
+                            }
+                    }
+                        
+                            
+                           
                         PlasmaComponents.Button {
                                 width: 40
                                 id: btnLoad

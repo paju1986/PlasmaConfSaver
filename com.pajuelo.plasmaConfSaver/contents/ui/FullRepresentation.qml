@@ -27,6 +27,7 @@ Item {
     property real itemHeight: Math.max(units.iconSizes.large, textHeight)
     property string savePath: null
     property string loadPath: null
+    property string exportPath: null
 
     Layout.minimumWidth: widgetWidth + 100
     Layout.minimumHeight: (itemHeight + 2*mediumSpacing) * 10//listView.count
@@ -161,8 +162,7 @@ Item {
                             }
                             
                             if(cmd == "pwd") {
-                                
-                                console.log("entra en pwd")
+  
                                 savePath = stdout.trim() + "/.config/plasmaConfSaver" ;
                                 console.log(savePath)
                                 placesSource.connectSource(savePath)
@@ -171,8 +171,7 @@ Item {
                             
                             if(cmd.indexOf("/latterun|grep -i latterun") != -1) {
                                  var latteDockRunning = stdout
-                                    console.log(cmd)
-                                    console.log(stdout)
+                    
                                     //if latte-dock was running when we saved then create a flag file for running it on restore            
                                     if(latteDockRunning != "") {
                                         console.log("exe")
@@ -184,6 +183,11 @@ Item {
                                     executeSource.connectSource("kwin_x11 --replace") 
                                     executeSource.connectSource("killall plasmashell && kstart5 plasmashell --window 5") 
                                 
+                            }
+                            if(cmd.indexOf("kdialog --getsavefilename") != -1) {
+                                exportPath = stdout
+                                executeSource.connectSource("cp " + savePath + "/tmpExport.tar.gz " + exportPath)
+                                executeSource.connectSource("rm " + savePath + "/tmpExport.tar.gz")
                             }
                             
                             
@@ -278,7 +282,7 @@ Item {
                             }
                          
                             Image {
-                              
+                              id: screenshot
                                 width: parent.width - (btnLoad.width + mediumSpacing *2 + btnDelete.width)
                                 height: parent.width - (btnLoad.width + mediumSpacing *2 + btnDelete.width) * 1.77
                                 fillMode: Image.Stretch
@@ -286,9 +290,12 @@ Item {
                             }
                     }
                         
-                            
-                           
-                        PlasmaComponents.Button {
+                            Column {
+                                 spacing: mediumSpacing
+                                
+                                
+                                PlasmaComponents.Button {
+                                    
                                 width: 40
                                 id: btnLoad
                                 text: ""
@@ -336,6 +343,24 @@ Item {
                             
                                 
                             }
+                            
+                            PlasmaComponents.Button {
+                                 width: 40
+                                id: btnExport
+                                text: ""
+                                 PlasmaCore.IconItem {
+                                    anchors.fill: parent
+                                    source: "document-export"
+                                    active: isHovered
+                                }
+                                onClicked:{
+                                    executeSource.connectSource("tar cvzf " + savePath + "/tmpExport.tar.gz " + "-C "+ savePath + "/" + model.modelData + " ." )
+                                    executeSource.connectSource("kdialog --getsavefilename $(pwd)/" + model.modelData +  ".tar.gz ")
+                                   
+                                    listView.forceLayout()
+                                }
+                            }
+                            
                              PlasmaComponents.Button {
                                  width: 40
                                 id: btnDelete
@@ -350,6 +375,10 @@ Item {
                                     listView.forceLayout()
                                 }
                             }
+                                
+                            }
+                           
+                        
                     }
                 }
             }

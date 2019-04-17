@@ -28,6 +28,7 @@ Item {
     property string savePath: null
     property string loadPath: null
     property string exportPath: null
+    property string importPath: null
 
     Layout.minimumWidth: widgetWidth + 100
     Layout.minimumHeight: (itemHeight + 2*mediumSpacing) * 10//listView.count
@@ -185,11 +186,28 @@ Item {
                                 
                             }
                             if(cmd.indexOf("kdialog --getsavefilename") != -1) {
-                                exportPath = stdout
+                                exportPath = stdout.replace("\n","")
                                 executeSource.connectSource("cp " + savePath + "/tmpExport.tar.gz " + exportPath)
                                 executeSource.connectSource("rm " + savePath + "/tmpExport.tar.gz")
                             }
-                            
+                            if(cmd.indexOf("kdialog --getopenfilename") != -1) {
+                                importPath = stdout.replace("\n","")
+                                var pathArray = importPath.split("/")
+                                
+                                console.log(pathArray)
+                                
+                                var fileName = pathArray[pathArray.length - 1]
+                                
+                                var nameFolder = fileName.split(".")
+                                
+                                executeSource.connectSource("mkdir " + savePath + "/" + nameFolder[0])
+                                
+                                executeSource.connectSource("tar xzvf " + importPath + " -C " + savePath + "/" + nameFolder[0])
+                                
+                                console.log("tar xzvf " + importPath + " -C " + savePath + "/" + nameFolder[0])
+                                
+                               
+                            }
                             
                             
                            
@@ -203,6 +221,20 @@ Item {
                     }
                                
                 }
+                PlasmaComponents.Button {
+                                 width: 40
+                                id: btnImport
+                                text: ""
+                                PlasmaCore.IconItem {
+                                    anchors.fill: parent
+                                    source: "document-import"
+                                    active: isHovered
+                                }
+                                onClicked:{
+                                    executeSource.connectSource("kdialog --getopenfilename $(pwd)")
+                                    listView.forceLayout()
+                                }
+                            }
         }
          
          

@@ -119,6 +119,7 @@ Item {
                         executeSource.connectSource("cp $(pwd)/.config/plasma-org.kde.plasma.desktop-appletsrc " + configFolder + "/plasma-org.kde.plasma.desktop-appletsrc") 
                         executeSource.connectSource("cp $(pwd)/.config/plasmarc " + configFolder + "/plasmarc")
                         executeSource.connectSource("cp $(pwd)/.config/plasmashellrc " + configFolder + "/plasmashellrcc")
+                        executeSource.connectSource("cp $(pwd)/.config/kdeglobals " + configFolder + "/kdeglobals")
                         
                         //kwin
                         executeSource.connectSource("cp $(pwd)/.config/kwinrc " + configFolder + "/kwinrc")
@@ -175,8 +176,8 @@ Item {
                                     //if latte-dock was running when we saved then create a flag file for running it on restore            
                                     if(latteDockRunning != "") {
                                         console.log("exe")
-                                        executeSource.connectSource("latte-dock --replace")
-                                       
+                                        executeSource.connectSource("killall latte-dock")
+                                        executeSource.connectSource("sleep 1 && latte-dock")
                                     } else{
                                         executeSource.connectSource("killall latte-dock")
                                     }
@@ -305,6 +306,7 @@ Item {
                                     executeSource.connectSource("cp " + savePath + "/" + model.modelData + "/plasma-org.kde.plasma.desktop-appletsrc $(pwd)/.config/plasma-org.kde.plasma.desktop-appletsrc") 
                                     executeSource.connectSource("cp " + savePath + "/" + model.modelData + "/plasmarc $(pwd)/.config/plasmarc")
                                     executeSource.connectSource("cp " + savePath + "/" + model.modelData + "/plasmashellrcc $(pwd)/.config/plasmashellrc")
+                                    executeSource.connectSource("cp " + savePath + "/" + model.modelData + "/kdeglobals $(pwd)/.config/kdeglobals")
                                     
                                     //kwin
                                     executeSource.connectSource("cp " + savePath + "/" + model.modelData + "/kwinrc $(pwd)/.config/kwinrc")

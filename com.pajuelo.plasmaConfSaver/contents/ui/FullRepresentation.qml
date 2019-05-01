@@ -130,6 +130,12 @@ Item {
                         //latte-dock config files
                         executeSource.connectSource("cp $(pwd)/.config/lattedockrc " + configFolder + "/lattedockrc")
                         executeSource.connectSource("cp -r $(pwd)/.config/latte " + configFolder + "/latte")
+                        
+                        //plasma themes and widgets
+                        executeSource.connectSource("cp -r $(pwd)/.local/share/plasma " + configFolder + "/plasma")
+                        
+                        //wallpapers
+                        executeSource.connectSource("cp -r $(pwd)/.local/share/wallpapers " + configFolder + "/wallpapers")
                        
                         executeSource.connectSource("pidof latte-dock")
 
@@ -357,8 +363,15 @@ Item {
                                     executeSource.connectSource("cp "+savePath + "/" + model.modelData + "/lattedockrc $(pwd)/.config/lattedockrc ")
                                     executeSource.connectSource("cp -r "+savePath + "/" + model.modelData + "/latte $(pwd)/.config/latte")
                                     
+                                    //plasma themes and widgets
+                                    executeSource.connectSource("rm -Rf $(pwd)/.local/share/plasma")
+                                    executeSource.connectSource("cp -r "+savePath + "/" + model.modelData + "/plasma $(pwd)/.local/share")
                                     
-                                     executeSource.connectSource("ls "+savePath + "/" + model.modelData + "/latterun|grep -i latterun")
+                                    //wallpapers
+                                    executeSource.connectSource("rm -Rf $(pwd)/.local/share/wallpapers")
+                                    executeSource.connectSource("cp -r "+savePath + "/" + model.modelData + "/wallpapers $(pwd)/.local/share/wallpapers")
+                                    
+                                    executeSource.connectSource("ls "+savePath + "/" + model.modelData + "/latterun|grep -i latterun")
                                      
                             
                                     

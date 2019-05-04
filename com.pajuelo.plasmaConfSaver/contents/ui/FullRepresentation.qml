@@ -266,7 +266,7 @@ Item {
 
             delegate: Item {
                 width: parent.width
-                height: itemHeight + 2*mediumSpacing + 50
+                height: itemHeight + 11*mediumSpacing
 
                 property bool isHovered: false
                 property bool isEjectHovered: false
@@ -291,8 +291,8 @@ Item {
                     Row {
                         x: mediumSpacing
                         y: mediumSpacing
-                        width: parent.width - 2*mediumSpacing
-                        height: itemHeight + 2*mediumSpacing + 50
+                        width: parent.width - mediumSpacing
+                        height: iitemHeight + 11*mediumSpacing
                         spacing: mediumSpacing
                         
 //                         Item { // Hack - since setting the dimensions of PlasmaCore.IconItem won't work
@@ -310,7 +310,7 @@ Item {
 
                        Column {
                             spacing: mediumSpacing
-                           width: parent.width - (btnLoad.width + mediumSpacing *2 + btnDelete.width)
+                           width: parent.width - (btnLoad.width + mediumSpacing * 2 )
                            PlasmaComponents.Label {
                                id: title
                                 text: model.modelData

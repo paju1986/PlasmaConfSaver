@@ -98,10 +98,24 @@ Item {
                                     anchors.fill: parent
                                     source: "document-save"
                                     active: isHovered
+                                    PlasmaCore.ToolTipArea {
+                                        anchors.fill: parent
+                                        id: tooltip
+                                        mainText: i18n("Save")
+                                        subText: i18n("Save your current customization")
+                                        icon: "document-save"
+                                        active: true
+                                    }
+                                      
                             }
              width: parent.width * 0.1
+            
+            
+            
              
              onClicked: {
+
+                 
                   //     var pwd = executeSource.data["pwd"]["stdout"]
                         
                         if(text1.text == "" || text1.text == null || text1.text == undefined) {
@@ -235,6 +249,13 @@ Item {
                                     anchors.fill: parent
                                     source: "document-import"
                                     active: isHovered
+                                    PlasmaCore.ToolTipArea {
+                                        anchors.fill: parent
+                                        mainText: i18n("Import")
+                                        subText: i18n("Import a customization")
+                                        icon: "document-import"
+                                        active: true
+                                    }
                                 }
                                 onClicked:{
                                     executeSource.connectSource("kdialog --getopenfilename $(pwd)")
@@ -341,6 +362,13 @@ Item {
                                     anchors.fill: parent
                                     source: "checkmark"
                                     active: isHovered
+                                    PlasmaCore.ToolTipArea {
+                                        anchors.fill: parent
+                                        mainText: i18n("Load")
+                                        subText: i18n("Load this customization")
+                                        icon: "checkmark"
+                                        active: true
+                                    }
                                 }
                                 onClicked: {
                                     executeSource.connectSource("rm -Rf $(pwd)/.config/plasma-org.kde.plasma.desktop-appletsrc")
@@ -397,6 +425,13 @@ Item {
                                     anchors.fill: parent
                                     source: "document-export"
                                     active: isHovered
+                                    PlasmaCore.ToolTipArea {
+                                        anchors.fill: parent
+                                        mainText: i18n("Export")
+                                        subText: i18n("Export this customization")
+                                        icon: "document-export"
+                                        active: true
+                                    }
                                 }
                                 onClicked:{
                                     executeSource.connectSource("tar cvzf " + savePath + "/tmpExport.tar.gz " + "-C "+ savePath + "/" + model.modelData + " ." )
@@ -414,6 +449,13 @@ Item {
                                     anchors.fill: parent
                                     source: "albumfolder-user-trash"
                                     active: isHovered
+                                    PlasmaCore.ToolTipArea {
+                                        anchors.fill: parent
+                                        mainText: i18n("Delete")
+                                        subText: i18n("Delete this customization")
+                                        icon: "albumfolder-user-trash"
+                                        active: true
+                                    }
                                 }
                                 onClicked:{
                                     executeSource.connectSource("rm -Rf " + savePath + "/" + model.modelData)

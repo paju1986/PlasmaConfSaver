@@ -287,7 +287,7 @@ Item {
 
             delegate: Item {
                 width: parent.width
-                height: itemHeight + 11*mediumSpacing
+                height: (mediumSpacing + btnLoad.height + mediumSpacing  + btnDelete.height + mediumSpacing  + btnExport.height +  mediumSpacing)
 
                 property bool isHovered: false
                 property bool isEjectHovered: false
@@ -330,6 +330,7 @@ Item {
                             
 
                        Column {
+                           id: columImage
                             spacing: mediumSpacing
                            width: parent.width - (btnLoad.width + mediumSpacing * 2 )
                            PlasmaComponents.Label {
@@ -342,8 +343,9 @@ Item {
                          
                             Image {
                               id: screenshot
-                                width: parent.width - (btnLoad.width + mediumSpacing *2 + btnDelete.width)
-                                height: parent.width - (btnLoad.width + mediumSpacing *2 + btnDelete.width) * 1.77
+                                 width: ((mediumSpacing + btnLoad.height + mediumSpacing  + btnDelete.height + mediumSpacing  + btnExport.height +  mediumSpacing) - textHeight) * 1.77
+                                 height:  (mediumSpacing + btnLoad.height + mediumSpacing  + btnDelete.height + mediumSpacing  + btnExport.height +  mediumSpacing) - textHeight
+                          //      anchors.fill: parent
                                 fillMode: Image.Stretch
                                 source: savePath + "/" + model.modelData + "/screenshot.png"
                             }

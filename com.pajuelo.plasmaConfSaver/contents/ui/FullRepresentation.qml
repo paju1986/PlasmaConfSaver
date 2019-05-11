@@ -202,7 +202,7 @@ Item {
                                         executeSource.connectSource("killall latte-dock")
                                     }
                                     executeSource.connectSource("kwin_x11 --replace") 
-                                    executeSource.connectSource("killall plasmashell && kstart5 plasmashell --window 5") 
+                                    executeSource.connectSource("sync && killall plasmashell && kstart5 plasmashell --window 5") 
                                 
                             }
                             if(cmd.indexOf("kdialog --getsavefilename") != -1) {

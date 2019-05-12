@@ -6,9 +6,7 @@
     <kcfgfile name=""/>
 
     <group name="General">
-        <entry name="targetfolder" type="string">
-            <default>/home/</default>
-        </entry>
+       
         <entry name="widgetWidth" type="int">
             <default>250</default>
         </entry>

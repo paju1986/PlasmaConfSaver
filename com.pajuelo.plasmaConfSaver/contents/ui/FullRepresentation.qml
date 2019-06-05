@@ -89,6 +89,7 @@ Item {
              anchors.left: col1.left
            PlasmaComponents.TextField {
              id: text1
+             placeholderText: i18n("Enter customization title")
              text: ""
              width: parent.width * 0.8
              

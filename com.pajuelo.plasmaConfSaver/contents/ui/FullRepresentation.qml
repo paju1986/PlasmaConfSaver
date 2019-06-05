@@ -19,16 +19,21 @@ import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
+import Qt.labs.platform 1.0
 
 Item {
     id: "parentItem"
     property real mediumSpacing: 1.5*units.smallSpacing
     property real textHeight: theme.defaultFont.pixelSize + theme.smallestFont.pixelSize + units.smallSpacing
     property real itemHeight: Math.max(units.iconSizes.large, textHeight)
-    property string savePath: null
+    
     property string loadPath: null
     property string exportPath: null
     property string importPath: null
+    property string configPath : StandardPaths.standardLocations(StandardPaths.GenericConfigLocation)[0].split("//")[1] 
+    property string dataPath : StandardPaths.standardLocations(StandardPaths.GenericDataLocation)[0].split("//")[1] 
+    property string savePath: configPath + "/plasmaConfSaver"
+    
 
     Layout.minimumWidth: widgetWidth + 100
     Layout.minimumHeight: (itemHeight + 2*mediumSpacing) * 10//listView.count
@@ -69,9 +74,7 @@ Item {
         id: placesSource
         engine: 'filebrowser'
         interval: 500
-        Component.onCompleted: {
-            executeSource.connectSource("pwd")
-        }
+        connectedSources: savePath
     }
     
 
@@ -116,40 +119,40 @@ Item {
              onClicked: {
 
                  
-                  //     var pwd = executeSource.data["pwd"]["stdout"]
+                      
                         
                         if(text1.text == "" || text1.text == null || text1.text == undefined) {
                             text1.text = "default"
                         }
-                        var configFolder = "$(pwd)/.config/plasmaConfSaver/" + text1.text
+                        var configFolder = configPath + "/plasmaConfSaver/" + text1.text
                         
                         
                         
-                        executeSource.connectSource("mkdir $(pwd)/.config/plasmaConfSaver/")
+                        executeSource.connectSource("mkdir "+configPath+"/plasmaConfSaver/")
                         executeSource.connectSource("mkdir " + configFolder);
                         
-                        //screenshot
+                       // screenshot
                         executeSource.connectSource("scrot " + configFolder + "/screenshot.png")
                         
-                        //plasma config files
-                        executeSource.connectSource("cp $(pwd)/.config/plasma-org.kde.plasma.desktop-appletsrc " + configFolder + "/plasma-org.kde.plasma.desktop-appletsrc") 
-                        executeSource.connectSource("cp $(pwd)/.config/plasmarc " + configFolder + "/plasmarc")
-                        executeSource.connectSource("cp $(pwd)/.config/plasmashellrc " + configFolder + "/plasmashellrcc")
-                        executeSource.connectSource("cp $(pwd)/.config/kdeglobals " + configFolder + "/kdeglobals")
+                       // plasma config files
+                        executeSource.connectSource("cp "+configPath+"/plasma-org.kde.plasma.desktop-appletsrc " + configFolder + "/plasma-org.kde.plasma.desktop-appletsrc") 
+                        executeSource.connectSource("cp "+configPath+"/plasmarc " + configFolder + "/plasmarc")
+                        executeSource.connectSource("cp "+configPath+"/plasmashellrc " + configFolder + "/plasmashellrc")
+                        executeSource.connectSource("cp "+configPath+"/kdeglobals " + configFolder + "/kdeglobals")
                         
                         //kwin
-                        executeSource.connectSource("cp $(pwd)/.config/kwinrc " + configFolder + "/kwinrc")
-                        executeSource.connectSource("cp $(pwd)/.config/kwinrulesrc " + configFolder + "/kwinrulesrc")
+                        executeSource.connectSource("cp "+configPath+"/kwinrc " + configFolder + "/kwinrc")
+                        executeSource.connectSource("cp "+configPath+"/kwinrulesrc " + configFolder + "/kwinrulesrc")
                         
                         //latte-dock config files
-                        executeSource.connectSource("cp $(pwd)/.config/lattedockrc " + configFolder + "/lattedockrc")
-                        executeSource.connectSource("cp -r $(pwd)/.config/latte " + configFolder + "/latte")
+                        executeSource.connectSource("cp "+configPath+"/lattedockrc " + configFolder + "/lattedockrc")
+                        executeSource.connectSource("cp -r "+configPath+"/latte " + configFolder + "/latte")
                         
                         //plasma themes and widgets
-                        executeSource.connectSource("cp -r $(pwd)/.local/share/plasma " + configFolder + "/plasma")
+                        executeSource.connectSource("cp -r "+dataPath+"/plasma " + configFolder + "/plasma")
                         
                         //wallpapers
-                        executeSource.connectSource("cp -r $(pwd)/.local/share/wallpapers " + configFolder + "/wallpapers")
+                        executeSource.connectSource("cp -r "+dataPath+"/wallpapers " + configFolder + "/wallpapers")
                        
                         executeSource.connectSource("pidof latte-dock")
 
@@ -165,7 +168,8 @@ Item {
                         target: executeSource
                         onExited : {
                             
-                    var configFolder = "$(pwd)/.config/plasmaConfSaver/" + text1.text
+                    
+                        var configFolder = configPath + "/plasmaConfSaver/" + text1.text
                    
                             if(cmd == "pidof latte-dock") {
                                 
@@ -182,13 +186,7 @@ Item {
                                 
                             }
                             
-                            if(cmd == "pwd") {
-  
-                                savePath = stdout.trim() + "/.config/plasmaConfSaver" ;
-                                console.log(savePath)
-                                placesSource.connectSource(savePath)
-                                
-                            }
+                            
                             
                             if(cmd.indexOf("/latterun|grep -i latterun") != -1) {
                                  var latteDockRunning = stdout
@@ -201,8 +199,8 @@ Item {
                                     } else{
                                         executeSource.connectSource("killall latte-dock")
                                     }
-                                    executeSource.connectSource("kwin_x11 --replace") 
-                                    executeSource.connectSource("sync && killall plasmashell && kstart5 plasmashell --window 5") 
+                                    executeSource.connectSource("qdbus org.kde.KWin /KWin reconfigure") 
+                                    executeSource.connectSource("kquitapp5 plasmashell && kstart5 plasmashell") 
                                 
                             }
                             if(cmd.indexOf("kdialog --getsavefilename") != -1) {
@@ -373,45 +371,8 @@ Item {
                                     }
                                 }
                                 onClicked: {
-                                    executeSource.connectSource("rm -Rf $(pwd)/.config/plasma-org.kde.plasma.desktop-appletsrc")
-                                    executeSource.connectSource("rm -Rf $(pwd)/.config/plasmarc")
-                                    executeSource.connectSource("rm -Rf $(pwd)/.config/plasmashellrc")
                                     
-                                    //plasma config files
-                                    executeSource.connectSource("cp " + savePath + "/" + model.modelData + "/plasma-org.kde.plasma.desktop-appletsrc $(pwd)/.config/plasma-org.kde.plasma.desktop-appletsrc") 
-                                    executeSource.connectSource("cp " + savePath + "/" + model.modelData + "/plasmarc $(pwd)/.config/plasmarc")
-                                    executeSource.connectSource("cp " + savePath + "/" + model.modelData + "/plasmashellrcc $(pwd)/.config/plasmashellrc")
-                                    executeSource.connectSource("cp " + savePath + "/" + model.modelData + "/kdeglobals $(pwd)/.config/kdeglobals")
-                                    
-                                    //kwin
-                                    executeSource.connectSource("cp " + savePath + "/" + model.modelData + "/kwinrc $(pwd)/.config/kwinrc")
-                                    executeSource.connectSource("cp " + savePath + "/" + model.modelData + "/kwinrulesrc $(pwd)/.config/kwinrulesrc")
-                                    
-                                    //latte-dock config files
-                                    executeSource.connectSource("rm -Rf $(pwd)/.config/lattedockrc")
-                                    executeSource.connectSource("rm -Rf $(pwd)/.config/latte")
-                                    executeSource.connectSource("cp "+savePath + "/" + model.modelData + "/lattedockrc $(pwd)/.config/lattedockrc ")
-                                    executeSource.connectSource("cp -r "+savePath + "/" + model.modelData + "/latte $(pwd)/.config/latte")
-                                    
-                                    //plasma themes and widgets
-                                    executeSource.connectSource("rm -Rf $(pwd)/.local/share/plasma")
-                                    executeSource.connectSource("cp -r "+savePath + "/" + model.modelData + "/plasma $(pwd)/.local/share")
-                                    
-                                    //wallpapers
-                                    executeSource.connectSource("rm -Rf $(pwd)/.local/share/wallpapers")
-                                    executeSource.connectSource("cp -r "+savePath + "/" + model.modelData + "/wallpapers $(pwd)/.local/share/wallpapers")
-                                    
-                                    executeSource.connectSource("ls "+savePath + "/" + model.modelData + "/latterun|grep -i latterun")
-                                     
-                            
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
+                                    executeSource.connectSource("sh "+dataPath+"/plasma/plasmoids/com.pajuelo.plasmaConfSaver/contents/scripts/load.sh "+ configPath + " " + savePath + " " + dataPath + " " + model.modelData)
                                     
                                     
                                 }

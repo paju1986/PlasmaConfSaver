@@ -4,6 +4,14 @@ savePath=$2
 dataPath=$3
 modelData=$4
 
+
+mv $dataPath/plasma $dataPath/plasma.bak
+cp -r $savePath/$modelData/plasma $dataPath
+                                    
+                                    
+mv $dataPath/wallpapers $dataPath/wallpapers.bak
+cp -r $savePath/$modelData/wallpapers $dataPath
+
 mv $configPath/plasma-org.kde.plasma.desktop-appletsrc $configPath/plasma-org.kde.plasma.desktop-appletsrc.bak
 mv $configPath/.config/plasmarc $configPath/.config/plasmarc.bak
 mv $configPath/.config/plasmashellrc $configPath/.config/plasmashellrc.bak
@@ -23,12 +31,7 @@ cp $savePath/$modelData/lattedockrc $configPath/lattedockrc
 cp -r $savePath/$modelData/latte $configPath
                                     
                                     
-mv $dataPath/plasma $dataPath/plasma.bak
-cp -r $savePath/$modelData/plasma $dataPath
-                                    
-                                    
-mv $dataPath/wallpapers $dataPath/wallpapers.bak
-cp -r $savePath/$modelData/wallpapers $dataPath
+
                                     
 FILE=$savePath/$modelData/latterun
 

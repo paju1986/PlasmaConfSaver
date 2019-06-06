@@ -189,21 +189,7 @@ Item {
                             
                             
                             
-                            if(cmd.indexOf("/latterun|grep -i latterun") != -1) {
-                                 var latteDockRunning = stdout
-                    
-                                    //if latte-dock was running when we saved then create a flag file for running it on restore            
-                                    if(latteDockRunning != "") {
-                                        console.log("exe")
-                                        executeSource.connectSource("killall latte-dock")
-                                        executeSource.connectSource("sleep 1 && latte-dock")
-                                    } else{
-                                        executeSource.connectSource("killall latte-dock")
-                                    }
-                                    executeSource.connectSource("qdbus org.kde.KWin /KWin reconfigure") 
-                                    executeSource.connectSource("kquitapp5 plasmashell && kstart5 plasmashell") 
-                                
-                            }
+                            
                             if(cmd.indexOf("kdialog --getsavefilename") != -1) {
                                 exportPath = stdout.replace("\n","")
                                 executeSource.connectSource("cp " + savePath + "/tmpExport.tar.gz " + exportPath)

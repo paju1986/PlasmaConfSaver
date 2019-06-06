@@ -18,21 +18,30 @@ cp $savePath/$modelData/kwinrulesrc $configPath/kwinrulesrc
                                     
                                     
 mv $configPath/lattedockrc $configPath/lattedockrc.bak
-mv $configPath/latte $configPath/latte.bak/
+mv $configPath/latte $configPath/latte.bak
 cp $savePath/$modelData/lattedockrc $configPath/lattedockrc 
-cp -r $savePath/$modelData/latte $configPath/latte
+cp -r $savePath/$modelData/latte $configPath
                                     
                                     
-mv $dataPath/plasma $dataPath/plasma.bak/
-cp -r $savePath/$modelData/plasma $dataPath/plasma
+mv $dataPath/plasma $dataPath/plasma.bak
+cp -r $savePath/$modelData/plasma $dataPath
                                     
                                     
-mv $dataPath/wallpapers $dataPath/wallpapers.bak/
-cp -r $savePath/$modelData/wallpapers $dataPath/wallpapers
+mv $dataPath/wallpapers $dataPath/wallpapers.bak
+cp -r $savePath/$modelData/wallpapers $dataPath
                                     
-ls $savePath/$modelData/latterun|grep -i latterun
+FILE=$savePath/$modelData/latterun
+
+kquitapp5 plasmashell && kstart5 plasmashell
+if [ -f "$FILE" ]; then
+    killall latte-dock 
+    sleep 1 && latte-dock
+else 
+    killall latte-dock
+fi
+
 
 qdbus org.kde.KWin /KWin reconfigure 
-kquitapp5 plasmashell && kstart5 plasmashell
+
                                      
                             

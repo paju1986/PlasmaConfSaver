@@ -35,16 +35,16 @@ cp -r $savePath/$modelData/latte $configPath
                                     
 FILE=$savePath/$modelData/latterun
 
-kquitapp5 plasmashell && kstart5 plasmashell
+
 if [ -f "$FILE" ]; then
     killall latte-dock 
-    sleep 1 && latte-dock
+    sleep 1 && nohup latte-dock &
 else 
     killall latte-dock
 fi
 
 
 qdbus org.kde.KWin /KWin reconfigure 
-
+kquitapp5 plasmashell && kstart5 plasmashell
                                      
                             

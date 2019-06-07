@@ -359,7 +359,7 @@ Item {
                                 }
                                 onClicked: {
                                     
-                                    executeSource.connectSource("sh "+dataPath+"/plasma/plasmoids/com.pajuelo.plasmaConfSaver/contents/scripts/load.sh "+ configPath + " " + savePath + " " + dataPath + " " + model.modelData)
+                                    executeSource.connectSource("nohup sh "+dataPath+"/plasma/plasmoids/com.pajuelo.plasmaConfSaver/contents/scripts/load.sh "+ configPath + " " + savePath + " " + dataPath + " " + model.modelData + " &")
                                     
                                     
                                 }

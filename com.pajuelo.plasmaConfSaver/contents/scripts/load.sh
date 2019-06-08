@@ -36,6 +36,7 @@ cp -r $savePath/$modelData/latte $configPath
 FILE=$savePath/$modelData/latterun
 
 
+sync
 if [ -f "$FILE" ]; then
     killall latte-dock 
     sleep 1 && nohup latte-dock &

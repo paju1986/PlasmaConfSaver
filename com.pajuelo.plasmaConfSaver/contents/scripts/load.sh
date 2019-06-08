@@ -45,6 +45,6 @@ fi
 
 
 qdbus org.kde.KWin /KWin reconfigure 
-kquitapp5 plasmashell && kstart5 plasmashell
+konsole -e kquitapp5 plasmashell && kstart5 plasmashell --windowclass plasmashell --window Desktop
                                      
                             

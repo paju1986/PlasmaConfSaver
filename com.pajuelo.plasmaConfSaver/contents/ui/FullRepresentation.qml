@@ -155,6 +155,9 @@ Item {
                         //wallpapers
                         executeSource.connectSource("cp -r "+dataPath+"/wallpapers " + configFolder + "/wallpapers")
                        
+                        //autostart
+                        executeSource.connectSource("cp -r "+dataPath+"/autostart " + configFolder + "/autostart")
+
                         executeSource.connectSource("pidof latte-dock")
 
                         

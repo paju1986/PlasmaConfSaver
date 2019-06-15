@@ -133,7 +133,7 @@ Item {
                         executeSource.connectSource("mkdir " + configFolder);
                         
                        // screenshot
-                        executeSource.connectSource("scrot " + configFolder + "/screenshot.png")
+                        executeSource.connectSource("spectacle -b -n -o " + configFolder + "/screenshot.png")
                         
                        // plasma config files
                         executeSource.connectSource("cp "+configPath+"/plasma-org.kde.plasma.desktop-appletsrc " + configFolder + "/plasma-org.kde.plasma.desktop-appletsrc") 
@@ -202,7 +202,6 @@ Item {
                                 importPath = stdout.replace("\n","")
                                 var pathArray = importPath.split("/")
                                 
-                                console.log(pathArray)
                                 
                                 var fileName = pathArray[pathArray.length - 1]
                                 
@@ -212,7 +211,6 @@ Item {
                                 
                                 executeSource.connectSource("tar xzvf " + importPath + " -C " + savePath + "/" + nameFolder[0])
                                 
-                                console.log("tar xzvf " + importPath + " -C " + savePath + "/" + nameFolder[0])
                                 
                                
                             }
@@ -361,6 +359,14 @@ Item {
                                     }
                                 }
                                 onClicked: {
+
+                                    //dissable all buttons when loading a config
+                                    btnLoad.enabled = false;
+                                    btnExport.enabled = false;
+                                    btnDelete.enabled = false;
+                                    btnImport.enabled = false;
+                                    button1.enabled = false;
+                                    
                                     
                                     executeSource.connectSource("nohup sh "+dataPath+"/plasma/plasmoids/com.pajuelo.plasmaConfSaver/contents/scripts/load.sh "+ configPath + " " + savePath + " " + dataPath + " " + model.modelData + " &")
                                     

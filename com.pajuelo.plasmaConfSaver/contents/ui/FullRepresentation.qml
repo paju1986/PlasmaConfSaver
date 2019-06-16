@@ -127,14 +127,12 @@ Item {
                             text1.text = "default"
                         }
                         var configFolder = configPath + "/plasmaConfSaver/" + text1.text
-                        
-                        executeSource.connectSource("nohup sh "+dataPath+"/plasma/plasmoids/com.pajuelo.plasmaConfSaver/contents/scripts/save.sh "+ configPath + " " + configFolder + " " + dataPath + " &")
-                        
 
+                        loadMask.visible = true;
+                        col1.enabled = false;
                         
-                        
-                        
-                        
+                        executeSource.connectSource("sh "+dataPath+"/plasma/plasmoids/com.pajuelo.plasmaConfSaver/contents/scripts/save.sh "+ configPath + " " + configFolder + " " + dataPath + " ")
+  
                       listView.forceLayout()
                       text1.text = ""
                       
@@ -143,6 +141,11 @@ Item {
                     Connections {
                         target: executeSource
                         onExited : {
+
+                            if(cmd.indexOf("save.sh") != -1) {
+                                loadMask.visible = false;
+                                col1.enabled = true;
+                            }
                    
                             if(cmd.indexOf("kdialog --getsavefilename") != -1) {
                                 exportPath = stdout.replace("\n","")
@@ -251,20 +254,7 @@ Item {
                         y: mediumSpacing
                         width: parent.width - mediumSpacing
                         height: iitemHeight + 11*mediumSpacing
-                        spacing: mediumSpacing
-                        
-//                         Item { // Hack - since setting the dimensions of PlasmaCore.IconItem won't work
-//                             height: units.iconSizes.medium
-//                             width: height
-//                             anchors.verticalCenter: parent.verticalCenter
-// 
-//                             PlasmaCore.IconItem {
-//                                 anchors.fill: parent
-//                                 source: jsGetIcon(model.modelData)
-//                                 active: isHovered
-//                             }
-//                         }
-                            
+                        spacing: mediumSpacing                            
 
                        Column {
                            id: columImage
@@ -282,16 +272,13 @@ Item {
                               id: screenshot
                                  width: ((mediumSpacing + btnLoad.height + mediumSpacing  + btnDelete.height + mediumSpacing  + btnExport.height +  mediumSpacing) - textHeight) * 1.77
                                  height:  (mediumSpacing + btnLoad.height + mediumSpacing  + btnDelete.height + mediumSpacing  + btnExport.height +  mediumSpacing) - textHeight
-                          //      anchors.fill: parent
                                 fillMode: Image.Stretch
                                 source: savePath + "/" + model.modelData + "/screenshot.png"
                             }
                     }
                         
                             Column {
-                                 spacing: mediumSpacing
-                                
-                                
+                                spacing: mediumSpacing         
                                 PlasmaComponents.Button {
                                     
                                 width: 40

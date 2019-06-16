@@ -142,7 +142,7 @@ Item {
                         target: executeSource
                         onExited : {
 
-                            if(cmd.indexOf("save.sh") != -1) {
+                            if(cmd.indexOf("save.sh") != -1 || cmd.indexOf("rm -Rf") != -1) {
                                 loadMask.visible = false;
                                 col1.enabled = true;
                             }
@@ -351,6 +351,8 @@ Item {
                                     }
                                 }
                                 onClicked:{
+                                    loadMask.visible = true;
+                                    col1.enabled = false;
                                     executeSource.connectSource("rm -Rf " + savePath + "/" + model.modelData)
                                     listView.forceLayout()
                                 }

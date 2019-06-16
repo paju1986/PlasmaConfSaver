@@ -127,72 +127,22 @@ Item {
                         }
                         var configFolder = configPath + "/plasmaConfSaver/" + text1.text
                         
+                        executeSource.connectSource("nohup sh "+dataPath+"/plasma/plasmoids/com.pajuelo.plasmaConfSaver/contents/scripts/save.sh "+ configPath + " " + configFolder + " " + dataPath + " &")
                         
-                        
-                        executeSource.connectSource("mkdir "+configPath+"/plasmaConfSaver/")
-                        executeSource.connectSource("mkdir " + configFolder);
-                        
-                       // screenshot
-                        executeSource.connectSource("spectacle -b -n -o " + configFolder + "/screenshot.png")
-                        
-                       // plasma config files
-                        executeSource.connectSource("cp "+configPath+"/plasma-org.kde.plasma.desktop-appletsrc " + configFolder + "/plasma-org.kde.plasma.desktop-appletsrc") 
-                        executeSource.connectSource("cp "+configPath+"/plasmarc " + configFolder + "/plasmarc")
-                        executeSource.connectSource("cp "+configPath+"/plasmashellrc " + configFolder + "/plasmashellrc")
-                        executeSource.connectSource("cp "+configPath+"/kdeglobals " + configFolder + "/kdeglobals")
-                        
-                        //kwin
-                        executeSource.connectSource("cp "+configPath+"/kwinrc " + configFolder + "/kwinrc")
-                        executeSource.connectSource("cp "+configPath+"/kwinrulesrc " + configFolder + "/kwinrulesrc")
-                        
-                        //latte-dock config files
-                        executeSource.connectSource("cp "+configPath+"/lattedockrc " + configFolder + "/lattedockrc")
-                        executeSource.connectSource("cp -r "+configPath+"/latte " + configFolder + "/latte")
-                        
-                        //plasma themes and widgets
-                        executeSource.connectSource("cp -r "+dataPath+"/plasma " + configFolder + "/plasma")
-                        
-                        //wallpapers
-                        executeSource.connectSource("cp -r "+dataPath+"/wallpapers " + configFolder + "/wallpapers")
-                       
-                        //autostart
-                        executeSource.connectSource("cp -r "+dataPath+"/autostart " + configFolder + "/autostart")
-
-                        executeSource.connectSource("pidof latte-dock")
 
                         
                         
                         
                         
                       listView.forceLayout()
+                      text1.text = ""
                       
                         
                     }
                     Connections {
                         target: executeSource
                         onExited : {
-                            
-                    
-                        var configFolder = configPath + "/plasmaConfSaver/" + text1.text
                    
-                            if(cmd == "pidof latte-dock") {
-                                
-                                    var latteDockRunning = stdout
-                                    
-                                    
-                                            
-                                //if latte-dock was running when we saved then create a flag file for running it on restore            
-                                if(latteDockRunning != "") {
-                                    executeSource.connectSource("touch " + configFolder + "/latterun")
-                                
-                                }
-                                text1.text = ""
-                                
-                            }
-                            
-                            
-                            
-                            
                             if(cmd.indexOf("kdialog --getsavefilename") != -1) {
                                 exportPath = stdout.replace("\n","")
                                 executeSource.connectSource("cp " + savePath + "/tmpExport.tar.gz " + exportPath)

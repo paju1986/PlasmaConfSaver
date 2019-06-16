@@ -4,18 +4,26 @@ savePath=$2
 dataPath=$3
 modelData=$4
 
-mv $dataPath/icons $dataPath/icons.bak
-cp -r $savePath/$modelData/icons $dataPath
+if [ -d "$savePath/$modelData/icons" ]; then
+    mv $dataPath/icons $dataPath/icons.bak
+    cp -r $savePath/$modelData/icons $dataPath    
+fi
 
-mv $dataPath/color-schemes $dataPath/color-schemes.bak
-cp -r $savePath/$modelData/color-schemes $dataPath
+if [ -d "$savePath/$modelData/color-schemes" ]; then
+    mv $dataPath/color-schemes $dataPath/color-schemes.bak
+    cp -r $savePath/$modelData/color-schemes $dataPath    
+fi
 
-mv $dataPath/plasma $dataPath/plasma.bak
-cp -r $savePath/$modelData/plasma $dataPath
+if [ -d "$savePath/$modelData/plasma" ]; then
+    mv $dataPath/plasma $dataPath/plasma.bak
+    cp -r $savePath/$modelData/plasma $dataPath    
+fi
+
+if [ -d "$savePath/$modelData/wallpapers" ]; then
+    mv $dataPath/wallpapers $dataPath/wallpapers.bak
+    cp -r $savePath/$modelData/wallpapers $dataPath    
+fi
                                     
-                                    
-mv $dataPath/wallpapers $dataPath/wallpapers.bak
-cp -r $savePath/$modelData/wallpapers $dataPath
 
 mv $configPath/plasma-org.kde.plasma.desktop-appletsrc $configPath/plasma-org.kde.plasma.desktop-appletsrc.bak
 mv $configPath/.config/plasmarc $configPath/.config/plasmarc.bak

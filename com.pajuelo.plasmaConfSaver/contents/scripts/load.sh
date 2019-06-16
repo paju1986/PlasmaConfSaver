@@ -4,6 +4,11 @@ savePath=$2
 dataPath=$3
 modelData=$4
 
+mv $dataPath/icons $dataPath/icons.bak
+cp -r $savePath/$modelData/icons $dataPath
+
+mv $dataPath/color-schemes $dataPath/color-schemes.bak
+cp -r $savePath/$modelData/color-schemes $dataPath
 
 mv $dataPath/plasma $dataPath/plasma.bak
 cp -r $savePath/$modelData/plasma $dataPath

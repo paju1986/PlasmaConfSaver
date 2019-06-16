@@ -82,6 +82,7 @@ Item {
     Column {
         id: col1
          anchors.fill: parent
+        
          Row {
              id: row1
              height:text1.height
@@ -309,16 +310,12 @@ Item {
                                     }
                                 }
                                 onClicked: {
-
-                                    //dissable all buttons when loading a config
-                                    btnLoad.enabled = false;
-                                    btnExport.enabled = false;
-                                    btnDelete.enabled = false;
-                                    btnImport.enabled = false;
-                                    button1.enabled = false;
+                                    loadMask.visible = true;
+                                    col1.enabled = false;
+                                 
                                     
                                     
-                                    executeSource.connectSource("nohup sh "+dataPath+"/plasma/plasmoids/com.pajuelo.plasmaConfSaver/contents/scripts/load.sh "+ configPath + " " + savePath + " " + dataPath + " " + model.modelData + " &")
+                                   executeSource.connectSource("nohup sh "+dataPath+"/plasma/plasmoids/com.pajuelo.plasmaConfSaver/contents/scripts/load.sh "+ configPath + " " + savePath + " " + dataPath + " " + model.modelData + " &")
                                     
                                     
                                 }
@@ -380,9 +377,30 @@ Item {
             }
         }
     }
+
     }
 
    
-     
+      Rectangle {
+        id: loadMask
+        anchors.fill: parent
+        color: "black"
+        opacity: 0.8
+        visible: false
+
+        Rectangle {
+            anchors.centerIn: parent
+                height: 178
+                width: 178
+                color: "transparent"
+                AnimatedImage {
+                    fillMode: Image.Stretch
+                    height: 178
+                    width: 178
+                    source: dataPath+"/plasma/plasmoids/com.pajuelo.plasmaConfSaver/contents/images/spinner.gif"                  
+                }
+        }
+        
+    }
 
 }

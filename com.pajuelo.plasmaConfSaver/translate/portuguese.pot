@@ -1,0 +1,43 @@
+#: ../contents/ui/FullRepresentation.qml:89
+msgid "Enter customization title"
+msgstr "Introduza o titulo da customização"
+
+#: ../contents/ui/FullRepresentation.qml:104
+msgid "Save"
+msgstr "Salvar"
+
+#: ../contents/ui/FullRepresentation.qml:105
+msgid "Save your current customization"
+msgstr "Salvar atual customização"
+
+#: ../contents/ui/FullRepresentation.qml:254
+msgid "Import"
+msgstr "Importar"
+
+#: ../contents/ui/FullRepresentation.qml:255
+msgid "Import a customization"
+msgstr "Importar customização"
+
+#: ../contents/ui/FullRepresentation.qml:369
+msgid "Load"
+msgstr "Carregar"
+
+#: ../contents/ui/FullRepresentation.qml:370
+msgid "Load this customization"
+msgstr "Carregar esta customização"
+
+#: ../contents/ui/FullRepresentation.qml:432
+msgid "Export"
+msgstr "Exportar"
+
+#: ../contents/ui/FullRepresentation.qml:433
+msgid "Export this customization"
+msgstr "Exportar customização"
+
+#: ../contents/ui/FullRepresentation.qml:456
+msgid "Delete"
+msgstr "Apagar"
+
+#: ../contents/ui/FullRepresentation.qml:457
+msgid "Delete this customization"
+msgstr "Apagar esta customização"

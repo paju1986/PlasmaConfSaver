@@ -126,12 +126,14 @@ Item {
                         if(text1.text == "" || text1.text == null || text1.text == undefined) {
                             text1.text = "default"
                         }
-                        var configFolder = configPath + "/plasmaConfSaver/" + text1.text
-
+                        var plasmaConfSaverFolder = configPath + "/plasmaConfSaver/";
+                        var configFolder = plasmaConfSaverFolder + text1.text;
+                        
+                        var saveScript = dataPath+"/plasma/plasmoids/com.pajuelo.plasmaConfSaver/contents/scripts/save.sh";
                         loadMask.visible = true;
                         col1.enabled = false;
-                        
-                        executeSource.connectSource("sh "+dataPath+"/plasma/plasmoids/com.pajuelo.plasmaConfSaver/contents/scripts/save.sh "+ configPath + " " + configFolder + " " + dataPath + " ")
+
+                        executeSource.connectSource("sh "+ saveScript + " " + configPath + " " + configFolder + " " + dataPath + " ")
   
                       listView.forceLayout()
                       text1.text = ""
@@ -300,9 +302,9 @@ Item {
                                     loadMask.visible = true;
                                     col1.enabled = false;
                                  
+                                    var loadScript = dataPath+"/plasma/plasmoids/com.pajuelo.plasmaConfSaver/contents/scripts/load.sh";
                                     
-                                    
-                                   executeSource.connectSource("nohup sh "+dataPath+"/plasma/plasmoids/com.pajuelo.plasmaConfSaver/contents/scripts/load.sh "+ configPath + " " + savePath + " " + dataPath + " " + model.modelData + " &")
+                                   executeSource.connectSource("cp " + loadScript + " " + savePath + "/load.sh && nohup sh "+ savePath + "/load.sh "+ configPath + " " + savePath + " " + dataPath + " " + model.modelData + " &")
                                     
                                     
                                 }

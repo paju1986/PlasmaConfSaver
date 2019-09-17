@@ -14,7 +14,7 @@ msgstr ""
 "Language-Team: Magnus Larsen <magnuslarsen@hotmail.com>\n"
 "Language: Danish\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../contents/ui/FullRepresentation.qml:89

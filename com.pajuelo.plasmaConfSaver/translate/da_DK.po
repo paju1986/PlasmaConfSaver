@@ -1,4 +1,4 @@
-# Translation of plasmaConfSaver in LANGUAGE
+# Translation of plasmaConfSaver in Danish
 # Copyright (C) 2019
 # This file is distributed under the same license as the plasmaConfSaver package.
 # Magnus Larsen <magnuslarsen@hotmail.com>, 2019.

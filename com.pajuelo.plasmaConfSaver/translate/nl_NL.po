@@ -20,7 +20,7 @@ msgstr ""
 
 #: ../contents/ui/FullRepresentation.qml:89
 msgid "Enter customization title"
-msgstr "Voer een naam in voor het sjabsoon"
+msgstr "Voer een naam in voor het sjabloon"
 
 #: ../contents/ui/FullRepresentation.qml:105
 msgid "Save"

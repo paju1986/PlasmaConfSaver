@@ -384,11 +384,9 @@ Item {
                 height: 178
                 width: 178
                 color: "transparent"
-                AnimatedImage {
-                    fillMode: Image.Stretch
+                PlasmaComponents.BusyIndicator {
                     height: 178
                     width: 178
-                    source: dataPath+"/plasma/plasmoids/com.pajuelo.plasmaConfSaver/contents/images/spinner.gif"                  
                 }
         }
         

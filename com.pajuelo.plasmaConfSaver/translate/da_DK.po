@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmaConfSaver \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-12 20:32+0200\n"
+"POT-Creation-Date: 2020-05-20 19:20+0200\n"
 "PO-Revision-Date: 2019-09-17 10:00+1\n"
 "Last-Translator: Magnus Larsen <magnuslarsen@hotmail.com>\n"
 "Language-Team: Magnus Larsen <magnuslarsen@hotmail.com>\n"
@@ -29,34 +29,42 @@ msgstr "Gem"
 msgid "Save your current customization"
 msgstr "Gem din nuværende layoutændring"
 
-#: ../contents/ui/FullRepresentation.qml:255
+#: ../contents/ui/FullRepresentation.qml:192
 msgid "Import"
 msgstr "Importer"
 
-#: ../contents/ui/FullRepresentation.qml:256
+#: ../contents/ui/FullRepresentation.qml:193
 msgid "Import a customization"
 msgstr "Importer en layoutændring"
 
-#: ../contents/ui/FullRepresentation.qml:370
+#: ../contents/ui/FullRepresentation.qml:291
 msgid "Load"
 msgstr "Indlæs"
 
-#: ../contents/ui/FullRepresentation.qml:371
+#: ../contents/ui/FullRepresentation.qml:292
 msgid "Load this customization"
 msgstr "Indlæs denne layoutændring"
 
-#: ../contents/ui/FullRepresentation.qml:433
+#: ../contents/ui/FullRepresentation.qml:324
+msgid "Update"
+msgstr ""
+
+#: ../contents/ui/FullRepresentation.qml:325
+msgid "Save this customization again"
+msgstr ""
+
+#: ../contents/ui/FullRepresentation.qml:358
 msgid "Export"
 msgstr "Eksporter"
 
-#: ../contents/ui/FullRepresentation.qml:434
+#: ../contents/ui/FullRepresentation.qml:359
 msgid "Export this customization"
 msgstr "Eksporter denne layoutændring"
 
-#: ../contents/ui/FullRepresentation.qml:457
+#: ../contents/ui/FullRepresentation.qml:382
 msgid "Delete"
 msgstr "Slet"
 
-#: ../contents/ui/FullRepresentation.qml:458
+#: ../contents/ui/FullRepresentation.qml:383
 msgid "Delete this customization"
 msgstr "Slet denne layoutændring"

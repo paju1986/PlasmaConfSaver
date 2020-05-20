@@ -1,5 +1,5 @@
 # Translation of plasmaConfSaver in LANGUAGE
-# Copyright (C) 2019
+# Copyright (C) 2020
 # This file is distributed under the same license as the plasmaConfSaver package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmaConfSaver \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-12 20:32+0200\n"
+"POT-Creation-Date: 2020-05-20 19:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,34 +29,42 @@ msgstr ""
 msgid "Save your current customization"
 msgstr ""
 
-#: ../contents/ui/FullRepresentation.qml:255
+#: ../contents/ui/FullRepresentation.qml:192
 msgid "Import"
 msgstr ""
 
-#: ../contents/ui/FullRepresentation.qml:256
+#: ../contents/ui/FullRepresentation.qml:193
 msgid "Import a customization"
 msgstr ""
 
-#: ../contents/ui/FullRepresentation.qml:370
+#: ../contents/ui/FullRepresentation.qml:291
 msgid "Load"
 msgstr ""
 
-#: ../contents/ui/FullRepresentation.qml:371
+#: ../contents/ui/FullRepresentation.qml:292
 msgid "Load this customization"
 msgstr ""
 
-#: ../contents/ui/FullRepresentation.qml:433
+#: ../contents/ui/FullRepresentation.qml:324
+msgid "Update"
+msgstr ""
+
+#: ../contents/ui/FullRepresentation.qml:325
+msgid "Save this customization again"
+msgstr ""
+
+#: ../contents/ui/FullRepresentation.qml:358
 msgid "Export"
 msgstr ""
 
-#: ../contents/ui/FullRepresentation.qml:434
+#: ../contents/ui/FullRepresentation.qml:359
 msgid "Export this customization"
 msgstr ""
 
-#: ../contents/ui/FullRepresentation.qml:457
+#: ../contents/ui/FullRepresentation.qml:382
 msgid "Delete"
 msgstr ""
 
-#: ../contents/ui/FullRepresentation.qml:458
+#: ../contents/ui/FullRepresentation.qml:383
 msgid "Delete this customization"
 msgstr ""

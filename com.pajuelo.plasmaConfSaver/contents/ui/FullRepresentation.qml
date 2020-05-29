@@ -26,14 +26,14 @@ Item {
     property real mediumSpacing: 1.5*units.smallSpacing
     property real textHeight: theme.defaultFont.pixelSize + theme.smallestFont.pixelSize + units.smallSpacing
     property real itemHeight: Math.max(units.iconSizes.large, textHeight)
-    
+
     property string loadPath: null
     property string exportPath: null
     property string importPath: null
-    property string configPath : StandardPaths.standardLocations(StandardPaths.GenericConfigLocation)[0].split("//")[1] 
-    property string dataPath : StandardPaths.standardLocations(StandardPaths.GenericDataLocation)[0].split("//")[1] 
+    property string configPath : StandardPaths.standardLocations(StandardPaths.GenericConfigLocation)[0].split("//")[1]
+    property string dataPath : StandardPaths.standardLocations(StandardPaths.GenericDataLocation)[0].split("//")[1]
     property string savePath: configPath + "/plasmaConfSaver"
-    
+
 
     Layout.minimumWidth: widgetWidth + 100
     Layout.minimumHeight: (itemHeight + 2*mediumSpacing) * 10//listView.count
@@ -44,45 +44,41 @@ Item {
     Layout.preferredWidth: Layout.minimumWidth
     Layout.preferredHeight: Layout.minimumHeight
 
-  
-    
+
+
     PlasmaCore.DataSource {
-		id: executeSource
-		engine: "executable"
-		connectedSources: []
-		onNewData: {
-			var exitCode = data["exit code"]
-			var exitStatus = data["exit status"]
-			var stdout = data["stdout"]
-			var stderr = data["stderr"]
-			exited(sourceName, exitCode, exitStatus, stdout, stderr)
-			disconnectSource(sourceName) // cmd finished
-		}
-		function exec(cmd) {
-			if (cmd) {
-				connectSource(cmd)
-			}
-		}
-		signal exited(string cmd, int exitCode, int exitStatus, string stdout, string stderr)
-	}
-	
+        id: executeSource
+        engine: "executable"
+        connectedSources: []
+        onNewData: {
+            var exitCode = data["exit code"]
+            var exitStatus = data["exit status"]
+            var stdout = data["stdout"]
+            var stderr = data["stderr"]
+            exited(sourceName, exitCode, exitStatus, stdout, stderr)
+            disconnectSource(sourceName) // cmd finished
+        }
+        function exec(cmd) {
+            if (cmd) {
+                connectSource(cmd)
+            }
+        }
+        signal exited(string cmd, int exitCode, int exitStatus, string stdout, string stderr)
+    }
 
-    
-
-    
     PlasmaCore.DataSource {
         id: placesSource
         engine: 'filebrowser'
         interval: 500
         connectedSources: savePath
     }
-    
 
- 
+
+
     Column {
         id: col1
          anchors.fill: parent
-        
+
          Row {
              id: row1
              height:text1.height
@@ -93,8 +89,8 @@ Item {
              placeholderText: i18n("Enter customization title")
              text: ""
              width: parent.width * 0.8
-             
-                               
+
+
            }
            PlasmaComponents.Button {
              id: button1
@@ -111,34 +107,34 @@ Item {
                                         icon: "document-save"
                                         active: true
                                     }
-                                      
+
                             }
              width: parent.width * 0.1
-            
-            
-            
-             
+
+
+
+
              onClicked: {
 
-                 
-                      
-                        
+
+
+
                         if(text1.text == "" || text1.text == null || text1.text == undefined) {
                             text1.text = "default"
                         }
                         var plasmaConfSaverFolder = configPath + "/plasmaConfSaver/";
                         var configFolder = plasmaConfSaverFolder + text1.text;
-                        
+
                         var saveScript = dataPath+"/plasma/plasmoids/com.pajuelo.plasmaConfSaver/contents/scripts/save.sh";
                         loadMask.visible = true;
                         col1.enabled = false;
 
                         executeSource.connectSource("sh "+ saveScript + " " + configPath + " " + configFolder + " " + dataPath + " ")
-  
+
                       listView.forceLayout()
                       text1.text = ""
-                      
-                        
+
+
                     }
                     Connections {
                         target: executeSource
@@ -148,7 +144,7 @@ Item {
                                 loadMask.visible = false;
                                 col1.enabled = true;
                             }
-                   
+
                             if(cmd.indexOf("kdialog --getsavefilename") != -1) {
                                 exportPath = stdout.replace("\n","")
                                 executeSource.connectSource("cp " + savePath + "/tmpExport.tar.gz " + exportPath)
@@ -157,31 +153,31 @@ Item {
                             if(cmd.indexOf("kdialog --getopenfilename") != -1) {
                                 importPath = stdout.replace("\n","")
                                 var pathArray = importPath.split("/")
-                                
-                                
+
+
                                 var fileName = pathArray[pathArray.length - 1]
-                                
+
                                 var nameFolder = fileName.split(".")
-                                
+
                                 executeSource.connectSource("mkdir " + savePath + "/" + nameFolder[0])
-                                
+
                                 executeSource.connectSource("tar xzvf " + importPath + " -C " + savePath + "/" + nameFolder[0])
-                                
-                                
-                               
+
+
+
                             }
-                            
-                            
-                           
-                            
-                
-                            
-                
-                
-                
+
+
+
+
+
+
+
+
+
                         }
                     }
-                               
+
                 }
                 PlasmaComponents.Button {
                                  width: 40
@@ -205,31 +201,31 @@ Item {
                                 }
                             }
         }
-         
-         
+
+
          PlasmaExtras.ScrollArea {
        anchors.bottom: col1.bottom
        anchors.top: row1.bottom
        width: widgetWidth + 100
-        
+
         ListView {
             id: listView
             anchors.fill: parent
-            model: 
+            model:
                 if(placesSource.data[savePath] != undefined) {
                     return placesSource.data[savePath]["directories.all"]
                 } else {
                     return ""
                 }
-            
-            
+
+
             highlight: PlasmaComponents.Highlight {}
             highlightMoveDuration: 0
             highlightResizeDuration: 0
 
             delegate: Item {
                 width: parent.width
-                height: (mediumSpacing + btnLoad.height + mediumSpacing  + btnDelete.height + mediumSpacing  + btnExport.height +  mediumSpacing)
+                height: (mediumSpacing + btnLoad.height + mediumSpacing + btnUpdate.height + mediumSpacing  + btnDelete.height + mediumSpacing  + btnExport.height +  mediumSpacing)
 
                 property bool isHovered: false
                 property bool isEjectHovered: false
@@ -248,7 +244,7 @@ Item {
                     onClicked: {
                         //expanded = false
                         text1.text = listView.currentIndex.text
-                        
+
                     }
 
                     Row {
@@ -256,7 +252,7 @@ Item {
                         y: mediumSpacing
                         width: parent.width - mediumSpacing
                         height: iitemHeight + 11*mediumSpacing
-                        spacing: mediumSpacing                            
+                        spacing: mediumSpacing
 
                        Column {
                            id: columImage
@@ -265,24 +261,24 @@ Item {
                            PlasmaComponents.Label {
                                id: title
                                 text: model.modelData
-                                
+
                                 height: theme.defaultFont.pixelSize
                                 elide: Text.ElideRight
                             }
-                         
+
                             Image {
                               id: screenshot
-                                 width: ((mediumSpacing + btnLoad.height + mediumSpacing  + btnDelete.height + mediumSpacing  + btnExport.height +  mediumSpacing) - textHeight) * 1.77
-                                 height:  (mediumSpacing + btnLoad.height + mediumSpacing  + btnDelete.height + mediumSpacing  + btnExport.height +  mediumSpacing) - textHeight
+                                 width: ((mediumSpacing + btnLoad.height + mediumSpacing + btnUpdate.height + mediumSpacing  + btnDelete.height + mediumSpacing  + btnExport.height) - textHeight) * 1.77
+                                 height: (mediumSpacing + btnLoad.height + mediumSpacing + btnUpdate.height + mediumSpacing  + btnDelete.height + mediumSpacing  + btnExport.height) - textHeight
                                 fillMode: Image.Stretch
                                 source: savePath + "/" + model.modelData + "/screenshot.png"
                             }
                     }
-                        
+
                             Column {
-                                spacing: mediumSpacing         
+                                spacing: mediumSpacing
                                 PlasmaComponents.Button {
-                                    
+
                                 width: 40
                                 id: btnLoad
                                 text: ""
@@ -301,17 +297,54 @@ Item {
                                 onClicked: {
                                     loadMask.visible = true;
                                     col1.enabled = false;
-                                 
+
                                     var loadScript = dataPath+"/plasma/plasmoids/com.pajuelo.plasmaConfSaver/contents/scripts/load.sh";
-                                    
+
                                    executeSource.connectSource("cp " + loadScript + " " + savePath + "/load.sh && nohup sh "+ savePath + "/load.sh "+ configPath + " " + savePath + " " + dataPath + " " + model.modelData + " &")
-                                    
-                                    
+
+
                                 }
-                            
-                                
+
+
                             }
-                            
+
+
+
+                                PlasmaComponents.Button {
+
+                                width: 40
+                                id: btnUpdate
+                                text: ""
+                                 PlasmaCore.IconItem {
+                                    anchors.fill: parent
+                                    source: "checkmark"
+                                    active: isHovered
+                                    PlasmaCore.ToolTipArea {
+                                        anchors.fill: parent
+                                        mainText: i18n("Update")
+                                        subText: i18n("Save this customization again")
+                                        icon: "checkmark"
+                                        active: true
+                                    }
+                                }
+                                onClicked: {
+                                    loadMask.visible = true;
+                                    col1.enabled = false;
+
+                                    var plasmaConfSaverFolder = configPath + "/plasmaConfSaver/";
+                                    var configFolder = plasmaConfSaverFolder + model.modelData;
+
+                                    var saveScript = dataPath+"/plasma/plasmoids/com.pajuelo.plasmaConfSaver/contents/scripts/save.sh";
+
+                                    executeSource.connectSource("sh "+ saveScript + " " + configPath + " " + configFolder + " " + dataPath + " ")
+
+                                }
+
+
+                            }
+
+
+
                             PlasmaComponents.Button {
                                  width: 40
                                 id: btnExport
@@ -331,11 +364,11 @@ Item {
                                 onClicked:{
                                     executeSource.connectSource("tar cvzf " + savePath + "/tmpExport.tar.gz " + "-C "+ savePath + "/" + model.modelData + " ." )
                                     executeSource.connectSource("kdialog --getsavefilename $(pwd)/" + model.modelData +  ".tar.gz ")
-                                   
+
                                     listView.forceLayout()
                                 }
                             }
-                            
+
                              PlasmaComponents.Button {
                                  width: 40
                                 id: btnDelete
@@ -359,10 +392,10 @@ Item {
                                     listView.forceLayout()
                                 }
                             }
-                                
+
                             }
-                           
-                        
+
+
                     }
                 }
             }
@@ -371,7 +404,7 @@ Item {
 
     }
 
-   
+
       Rectangle {
         id: loadMask
         anchors.fill: parent
@@ -389,7 +422,7 @@ Item {
                     width: 178
                 }
         }
-        
+
     }
 
 }

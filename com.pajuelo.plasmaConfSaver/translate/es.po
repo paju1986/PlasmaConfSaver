@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasmaConfSaver \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-12 18:20+0200\n"
+"POT-Creation-Date: 2020-05-20 19:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,42 +21,50 @@ msgstr ""
 msgid "Enter customization title"
 msgstr "Introduzca el título de la personalización"
 
-#: ../contents/ui/FullRepresentation.qml:104
+#: ../contents/ui/FullRepresentation.qml:105
 msgid "Save"
 msgstr "Guardar"
 
-#: ../contents/ui/FullRepresentation.qml:105
+#: ../contents/ui/FullRepresentation.qml:106
 msgid "Save your current customization"
 msgstr "Guardar tu personalización de escritorio actual"
 
-#: ../contents/ui/FullRepresentation.qml:254
+#: ../contents/ui/FullRepresentation.qml:192
 msgid "Import"
 msgstr "Importar"
 
-#: ../contents/ui/FullRepresentation.qml:255
+#: ../contents/ui/FullRepresentation.qml:193
 msgid "Import a customization"
 msgstr "Importar personalización"
 
-#: ../contents/ui/FullRepresentation.qml:369
+#: ../contents/ui/FullRepresentation.qml:291
 msgid "Load"
 msgstr "Cargar"
 
-#: ../contents/ui/FullRepresentation.qml:370
+#: ../contents/ui/FullRepresentation.qml:292
 msgid "Load this customization"
 msgstr "Carga esta personalización"
 
-#: ../contents/ui/FullRepresentation.qml:432
+#: ../contents/ui/FullRepresentation.qml:324
+msgid "Update"
+msgstr "Actualizar"
+
+#: ../contents/ui/FullRepresentation.qml:325
+msgid "Save this customization again"
+msgstr "Guardar esta personalización de nuevo"
+
+#: ../contents/ui/FullRepresentation.qml:358
 msgid "Export"
 msgstr "Exportar"
 
-#: ../contents/ui/FullRepresentation.qml:433
+#: ../contents/ui/FullRepresentation.qml:359
 msgid "Export this customization"
 msgstr "Exportar personalización"
 
-#: ../contents/ui/FullRepresentation.qml:456
+#: ../contents/ui/FullRepresentation.qml:382
 msgid "Delete"
 msgstr "Borrar"
 
-#: ../contents/ui/FullRepresentation.qml:457
+#: ../contents/ui/FullRepresentation.qml:383
 msgid "Delete this customization"
 msgstr "Borra esta personalización"

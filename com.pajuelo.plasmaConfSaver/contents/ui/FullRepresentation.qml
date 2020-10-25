@@ -95,6 +95,7 @@ Item {
            PlasmaComponents.Button {
              id: button1
              text: ""
+             height: parent.height
              PlasmaCore.IconItem {
                                     anchors.fill: parent
                                     source: "document-save"
@@ -141,6 +142,7 @@ Item {
                         onExited : {
 
                             if(cmd.indexOf("save.sh") != -1 || cmd.indexOf("rm -Rf") != -1) {
+                                listView.forceLayout();
                                 loadMask.visible = false;
                                 col1.enabled = true;
                             }
@@ -183,6 +185,7 @@ Item {
                                  width: 40
                                 id: btnImport
                                 text: ""
+                                height: parent.height
                                 PlasmaCore.IconItem {
                                     anchors.fill: parent
                                     source: "document-import"
@@ -225,7 +228,9 @@ Item {
 
             delegate: Item {
                 width: parent.width
-                height: (mediumSpacing + btnLoad.height + mediumSpacing + btnUpdate.height + mediumSpacing  + btnDelete.height + mediumSpacing  + btnExport.height +  mediumSpacing)
+               // height: (mediumSpacing + btnLoad.height + mediumSpacing + btnUpdate.height + mediumSpacing  + btnDelete.height + mediumSpacing  + btnExport.height +  mediumSpacing)
+               height: (mediumSpacing + btnLoad.height + mediumSpacing + btnDelete.height + mediumSpacing  + btnExport.height +  mediumSpacing)
+
 
                 property bool isHovered: false
                 property bool isEjectHovered: false
@@ -268,8 +273,10 @@ Item {
 
                             Image {
                               id: screenshot
-                                 width: ((mediumSpacing + btnLoad.height + mediumSpacing + btnUpdate.height + mediumSpacing  + btnDelete.height + mediumSpacing  + btnExport.height) - textHeight) * 1.77
-                                 height: (mediumSpacing + btnLoad.height + mediumSpacing + btnUpdate.height + mediumSpacing  + btnDelete.height + mediumSpacing  + btnExport.height) - textHeight
+                                 //width: ((mediumSpacing + btnLoad.height + mediumSpacing + btnUpdate.height + mediumSpacing  + btnDelete.height + mediumSpacing  + btnExport.height) - textHeight) * 1.77
+                                 //height: (mediumSpacing + btnLoad.height + mediumSpacing + btnUpdate.height + mediumSpacing  + btnDelete.height + mediumSpacing  + btnExport.height) - textHeight
+                                 width: ((mediumSpacing + btnLoad.height + mediumSpacing +  btnDelete.height + mediumSpacing  + btnExport.height) - textHeight) * 1.77
+                                 height: (mediumSpacing + btnLoad.height + mediumSpacing +  btnDelete.height + mediumSpacing  + btnExport.height) - textHeight
                                 fillMode: Image.Stretch
                                 source: savePath + "/" + model.modelData + "/screenshot.png"
                             }
@@ -282,6 +289,7 @@ Item {
                                 width: 40
                                 id: btnLoad
                                 text: ""
+                                 height: btnImport.height
                                  PlasmaCore.IconItem {
                                     anchors.fill: parent
                                     source: "checkmark"
@@ -310,7 +318,7 @@ Item {
 
 
 
-                                PlasmaComponents.Button {
+                          /*      PlasmaComponents.Button {
 
                                 width: 40
                                 id: btnUpdate
@@ -337,11 +345,14 @@ Item {
                                     var saveScript = dataPath+"/plasma/plasmoids/com.pajuelo.plasmaConfSaver/contents/scripts/save.sh";
 
                                     executeSource.connectSource("sh "+ saveScript + " " + configPath + " " + configFolder + " " + dataPath + " ")
+                                    
+                                    listView.forceLayout()
+                                    text1.text = ""
 
                                 }
 
 
-                            }
+                            } */
 
 
 
@@ -349,6 +360,7 @@ Item {
                                  width: 40
                                 id: btnExport
                                 text: ""
+                                height: btnImport.height
                                  PlasmaCore.IconItem {
                                     anchors.fill: parent
                                     source: "document-export"
@@ -373,6 +385,7 @@ Item {
                                  width: 40
                                 id: btnDelete
                                 text: ""
+                                height: btnImport.height
                                 PlasmaCore.IconItem {
                                     anchors.fill: parent
                                     source: "albumfolder-user-trash"

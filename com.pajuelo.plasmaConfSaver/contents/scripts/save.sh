@@ -3,10 +3,13 @@ configFolder=$2
 dataPath=$3
 
 mkdir "$configPath/plasmaConfSaver/"
+rm -Rf "$configFolder"
 mkdir "$configFolder"
 
 # screenshot
-spectacle -b -n -o "$configFolder/screenshot.png"
+#FIXME: due to a bug on spectacle actually is not saving screenshots to disk, use scrot instead
+#spectacle -b -n -o "$configFolder/screenshot.png"
+scrot "$configFolder/screenshot.png"
 
 # plasma config files
 cp "$configPath/plasma-org.kde.plasma.desktop-appletsrc" "$configFolder/plasma-org.kde.plasma.desktop-appletsrc"

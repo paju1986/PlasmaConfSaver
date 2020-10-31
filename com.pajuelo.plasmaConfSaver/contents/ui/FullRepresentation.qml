@@ -152,9 +152,10 @@ Item {
                             
                             if(cmd.indexOf("kdialog --getsavefilename") != -1) {
                                 exportPath = stdout.replace("\n","")
-                                text1.text = "export: " + exportPath
                                 executeSource.connectSource("cp " + savePath + "/tmpExport.tar.gz " + exportPath)
                                 executeSource.connectSource("rm " + savePath + "/tmpExport.tar.gz")
+                                loadMask.visible = false;
+                                col1.enabled = true;
                             }
                             if(cmd.indexOf("kdialog --getopenfilename") != -1) {
                                 importPath = stdout.replace("\n","")
@@ -379,6 +380,8 @@ Item {
                                 }
                                 onClicked:{
                                     parentItem.modelData = model.modelData
+                                    loadMask.visible = true;
+                                    col1.enabled = false;
                                     executeSource.connectSource("tar cvzf " + savePath + "/tmpExport.tar.gz " + "-C "+ savePath + "/" + model.modelData + " .")
                                     
                                     

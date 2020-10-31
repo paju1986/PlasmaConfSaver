@@ -41,6 +41,11 @@ cp "$configPath/konsolerc" "$configFolder/konsolerc"
 cp "$configPath/kscreenlockerrc" "$configFolder/kscreenlockerrc"
 #krunner config
 cp "$configPath/krunnerrc" "$configFolder/krunnerrc"
+#kvantum theme
+cp -r "$configPath/Kvantum" "$configFolder/Kvantum"
+
+#autostart
+cp -r "$configPath/autostart" "$configFolder/autostart"
 
 #plasma themes and widgets
 cp -r "$dataPath/plasma" "$configFolder/plasma"
@@ -48,8 +53,7 @@ cp -r "$dataPath/plasma" "$configFolder/plasma"
 #wallpapers
 cp -r "$dataPath/wallpapers" "$configFolder/wallpapers"
 
-#autostart
-cp -r "$dataPath/autostart" "$configFolder/autostart"
+
 
 #icons
 cp -r "$dataPath/icons" "$configFolder/icons"

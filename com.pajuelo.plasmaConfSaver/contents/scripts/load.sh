@@ -48,9 +48,14 @@ cp "$savePath/$modelData/kwinrulesrc" "$configPath/kwinrulesrc"
 mv "$configPath/lattedockrc" "$configPath/lattedockrc.bak"
 mv "$configPath/latte" "$configPath/latte.bak"
 mv "$configPath/autostart" "$configPath/autostart.bak"
+mv "$configPath/Kvantum" "$configPath/Kvantum.bak"
 cp "$savePath/$modelData/lattedockrc" "$configPath/lattedockrc"
 cp -r "$savePath/$modelData/latte" "$configPath"
 cp -r "$savePath/$modelData/autostart" "$configPath"
+cp -r "$savePath/$modelData/Kvantum" "$configPath"
+#kvantum
+
+
 
 FILE=$savePath/$modelData/latterun
 

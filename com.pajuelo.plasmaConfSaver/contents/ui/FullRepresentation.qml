@@ -33,7 +33,7 @@ Item {
     property string configPath : StandardPaths.standardLocations(StandardPaths.GenericConfigLocation)[0].split("//")[1]
     property string dataPath : StandardPaths.standardLocations(StandardPaths.GenericDataLocation)[0].split("//")[1]
     property string savePath: configPath + "/plasmaConfSaver"
-
+    property string modelData : null
 
     Layout.minimumWidth: widgetWidth + 100
     Layout.minimumHeight: (itemHeight + 2*mediumSpacing) * 10//listView.count
@@ -146,9 +146,13 @@ Item {
                                 loadMask.visible = false;
                                 col1.enabled = true;
                             }
-
+                            if(cmd.indexOf("tar cvzf") != -1) { 
+                                executeSource.connectSource("kdialog --getsavefilename $(pwd)/" + modelData +  ".tar.gz ")
+                            }
+                            
                             if(cmd.indexOf("kdialog --getsavefilename") != -1) {
                                 exportPath = stdout.replace("\n","")
+                                text1.text = "export: " + exportPath
                                 executeSource.connectSource("cp " + savePath + "/tmpExport.tar.gz " + exportPath)
                                 executeSource.connectSource("rm " + savePath + "/tmpExport.tar.gz")
                             }
@@ -374,9 +378,10 @@ Item {
                                     }
                                 }
                                 onClicked:{
-                                    executeSource.connectSource("tar cvzf " + savePath + "/tmpExport.tar.gz " + "-C "+ savePath + "/" + model.modelData + " ." )
-                                    executeSource.connectSource("kdialog --getsavefilename $(pwd)/" + model.modelData +  ".tar.gz ")
-
+                                    parentItem.modelData = model.modelData
+                                    executeSource.connectSource("tar cvzf " + savePath + "/tmpExport.tar.gz " + "-C "+ savePath + "/" + model.modelData + " .")
+                                    
+                                    
                                     listView.forceLayout()
                                 }
                             }

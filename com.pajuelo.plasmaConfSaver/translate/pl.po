@@ -1,0 +1,70 @@
+# Translation of plasmaConfSaver in Polish
+# Copyright (C) 2020
+# This file is distributed under the same license as the plasmaConfSaver package.
+# FIRST AUTHOR rafneq@gmail.com, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: plasmaConfSaver \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-05-20 19:20+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: RafneQ <rafneq@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../contents/ui/FullRepresentation.qml:89
+msgid "Enter customization title"
+msgstr "Podaj nazwę dla konfiguracji"
+
+#: ../contents/ui/FullRepresentation.qml:105
+msgid "Save"
+msgstr "Zapisz"
+
+#: ../contents/ui/FullRepresentation.qml:106
+msgid "Save your current customization"
+msgstr "Zapisz obecną konfigurację"
+
+#: ../contents/ui/FullRepresentation.qml:192
+msgid "Import"
+msgstr "Importuj"
+
+#: ../contents/ui/FullRepresentation.qml:193
+msgid "Import a customization"
+msgstr "Importuj wybraną konfigurację"
+
+#: ../contents/ui/FullRepresentation.qml:291
+msgid "Load"
+msgstr "Wczytaj"
+
+#: ../contents/ui/FullRepresentation.qml:292
+msgid "Load this customization"
+msgstr "Wczytaj wybraną konfigurację"
+
+#: ../contents/ui/FullRepresentation.qml:324
+msgid "Update"
+msgstr "Zaktualizuj"
+
+#: ../contents/ui/FullRepresentation.qml:325
+msgid "Save this customization again"
+msgstr "Zapisz ponownie wybraną konfigurację"
+
+#: ../contents/ui/FullRepresentation.qml:358
+msgid "Export"
+msgstr "Eksportuj"
+
+#: ../contents/ui/FullRepresentation.qml:359
+msgid "Export this customization"
+msgstr "Eksportuj wybraną konfigurację"
+
+#: ../contents/ui/FullRepresentation.qml:382
+msgid "Delete"
+msgstr "Usuń"
+
+#: ../contents/ui/FullRepresentation.qml:383
+msgid "Delete this customization"
+msgstr "Usuń wybraną konfigurację"

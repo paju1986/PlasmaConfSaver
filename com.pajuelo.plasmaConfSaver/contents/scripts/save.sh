@@ -23,7 +23,7 @@ cp "$configPath/kwinrulesrc" "$configFolder/kwinrulesrc"
 
 #latte-dock config files
 cp "$configPath/lattedockrc" "$configFolder/lattedockrc"
-cp -r "$configPath/latte" "$configFolder/latte"
+cp -rL "$configPath/latte" "$configFolder/latte"
 
 #dolphin config
 cp "$configPath/dolphinrc" "$configFolder/dolphinrc"
@@ -42,27 +42,27 @@ cp "$configPath/kscreenlockerrc" "$configFolder/kscreenlockerrc"
 #krunner config
 cp "$configPath/krunnerrc" "$configFolder/krunnerrc"
 #kvantum theme
-cp -r "$configPath/Kvantum" "$configFolder/Kvantum"
+cp -rL "$configPath/Kvantum" "$configFolder/Kvantum"
 
 #autostart
-cp -r "$configPath/autostart" "$configFolder/autostart"
+cp -rL "$configPath/autostart" "$configFolder/autostart"
 
 #plasma themes and widgets
-cp -r "$dataPath/plasma" "$configFolder/plasma"
+cp -rL "$dataPath/plasma" "$configFolder/plasma"
 
 #wallpapers
-cp -r "$dataPath/wallpapers" "$configFolder/wallpapers"
+cp -rL "$dataPath/wallpapers" "$configFolder/wallpapers"
 
 
 
 #icons
-cp -r "$dataPath/icons" "$configFolder/icons"
+cp -rL "$dataPath/icons" "$configFolder/icons"
 
 #color-schemes
-cp -r "$dataPath/color-schemes" "$configFolder/color-schemes"
+cp -rL "$dataPath/color-schemes" "$configFolder/color-schemes"
 
 #fonts
-cp -r "$dataPath/kfontinst" "$configFolder/kfontinst"
+cp -rL "$dataPath/kfontinst" "$configFolder/kfontinst"
 
 #if latte-dock was running when we saved then create a flag file for running it on restore
 if pgrep -x latte-dock > /dev/null

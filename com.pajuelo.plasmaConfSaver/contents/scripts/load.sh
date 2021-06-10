@@ -75,6 +75,8 @@ cp "$savePath/$modelData/konsolerc" "$configPath/konsolerc"
 cp "$savePath/$modelData/kscreenlockerrc" "$configPath/kscreenlockerrc"
 #krunner config
 cp "$savePath/$modelData/krunnerrc" "$configPath/krunnerrc"
+#fonts dpi config
+cp "$savePath/$modelData/kcmfonts" "$configPath/kcmfonts"
 
 
 sync

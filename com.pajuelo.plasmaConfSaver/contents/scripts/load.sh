@@ -29,6 +29,20 @@ if [ -d "$savePath/$modelData/kfontinst" ]; then
     cp -r "$savePath/$modelData/kfontinst" "$dataPath"    
 fi
 
+if [ -d "$savePath/$modelData/yakuake" ]; then
+    cp -r "$savePath/$modelData/yakuake" "$dataPath"    
+fi
+
+if [ -d "$savePath/$modelData/konsole" ]; then
+	mv "$dataPath/konsole/*.profile" "$dataPath/konsole/*.profile.bak"
+    cp -r "$savePath/$modelData/konsole" "$dataPath"    
+fi
+
+if [ -d "$savePath/$modelData/plasma-workspace/env" ]; then
+	mv "$dataPath/plasma-workspace/env" "$dataPath/plasma-workspace/env.bak"
+    cp -r "$savePath/$modelData/plasma-workspace/env" "$dataPath/plasma-workspace/env"    
+fi
+
 #backups
 mv "$configPath/plasma-org.kde.plasma.desktop-appletsrc" "$configPath/plasma-org.kde.plasma.desktop-appletsrc.bak"
 mv "$configPath/.config/plasmarc" "$configPath/.config/plasmarc.bak"
@@ -48,10 +62,12 @@ cp "$savePath/$modelData/kwinrulesrc" "$configPath/kwinrulesrc"
 mv "$configPath/lattedockrc" "$configPath/lattedockrc.bak"
 mv "$configPath/latte" "$configPath/latte.bak"
 mv "$configPath/autostart" "$configPath/autostart.bak"
+mv "$configPath/autostart-scripts" "$configPath/autostart-scripts.bak"
 mv "$configPath/Kvantum" "$configPath/Kvantum.bak"
 cp "$savePath/$modelData/lattedockrc" "$configPath/lattedockrc"
 cp -r "$savePath/$modelData/latte" "$configPath"
 cp -r "$savePath/$modelData/autostart" "$configPath"
+cp -r "$savePath/$modelData/autostart-scripts" "$configPath"
 cp -r "$savePath/$modelData/Kvantum" "$configPath"
 #kvantum
 

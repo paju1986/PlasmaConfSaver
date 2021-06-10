@@ -17,6 +17,13 @@ cp "$configPath/plasmarc" "$configFolder/plasmarc"
 cp "$configPath/plasmashellrc" "$configFolder/plasmashellrc"
 cp "$configPath/kdeglobals" "$configFolder/kdeglobals"
 
+#autostart
+cp -r "$configPath/autostart" "$configFolder/autostart"
+cp -r "$configPath/autostart-scripts" "$configFolder/autostart-scripts"
+
+#env scripts
+cp -r "$configPath/plasma-workspace/env" "$configFolder/plasma-workspace/env"
+
 #kwin
 cp "$configPath/kwinrc" "$configFolder/kwinrc"
 cp "$configPath/kwinrulesrc" "$configFolder/kwinrulesrc"
@@ -43,17 +50,18 @@ cp "$configPath/kscreenlockerrc" "$configFolder/kscreenlockerrc"
 cp "$configPath/krunnerrc" "$configFolder/krunnerrc"
 #kvantum theme
 cp -r "$configPath/Kvantum" "$configFolder/Kvantum"
-
-#autostart
-cp -r "$configPath/autostart" "$configFolder/autostart"
+#konsole
+cp -r "$dataPath/konsole" "$configFolder/konsole"
+cp -r "$configPath/konsolerc" "$configFolder/konsolerc"
+#yakuake
+cp -r "$dataPath/yakuake" "$configFolder/yakuake"
+cp -r "$configPath/yakuakerc" "$configFolder/yakuakerc"
 
 #plasma themes and widgets
 cp -r "$dataPath/plasma" "$configFolder/plasma"
 
 #wallpapers
 cp -r "$dataPath/wallpapers" "$configFolder/wallpapers"
-
-
 
 #icons
 cp -r "$dataPath/icons" "$configFolder/icons"

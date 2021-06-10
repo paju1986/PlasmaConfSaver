@@ -63,6 +63,8 @@ cp -r "$dataPath/color-schemes" "$configFolder/color-schemes"
 
 #fonts
 cp -r "$dataPath/kfontinst" "$configFolder/kfontinst"
+#fonts dpi
+cp "$configPath/kcmfonts" "$configFolder/kcmfonts"
 
 #if latte-dock was running when we saved then create a flag file for running it on restore
 if pgrep -x latte-dock > /dev/null

@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: plasmaConfSaver\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-20 19:20+0200\n"
-"PO-Revision-Date: 2019-06-15 20:04+0200\n"
-"Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
+"PO-Revision-Date: 2022-02-12 13:53+0100\n"
+"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch <vistausss@outlook.com>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: ../contents/ui/FullRepresentation.qml:89
 msgid "Enter customization title"
@@ -28,7 +28,7 @@ msgstr "Opslaan"
 
 #: ../contents/ui/FullRepresentation.qml:106
 msgid "Save your current customization"
-msgstr "Sla je huidige sjabloon op"
+msgstr "Sla het huidige sjabloon op"
 
 #: ../contents/ui/FullRepresentation.qml:192
 msgid "Import"
@@ -48,11 +48,11 @@ msgstr "Laad dit sjabloon"
 
 #: ../contents/ui/FullRepresentation.qml:324
 msgid "Update"
-msgstr ""
+msgstr "Bijwerken"
 
 #: ../contents/ui/FullRepresentation.qml:325
 msgid "Save this customization again"
-msgstr ""
+msgstr "Sla het huidige opnieuw sjabloon op"
 
 #: ../contents/ui/FullRepresentation.qml:358
 msgid "Export"
